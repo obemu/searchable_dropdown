@@ -1,3 +1,6 @@
+## [6.0.2] - 2025.01.16
+* Fix lint errors
+
 ## [6.0.1] - 2024.09.21
 * #### New Feature:
   * add `Semantics` to searchBox to support voiceOver/TalkBack ...

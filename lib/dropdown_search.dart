@@ -497,7 +497,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     dropdownButtonPressed() => _selectSearchMode();
 
     if (!widget.suffixProps.dropdownButtonProps.isVisible &&
-        !widget.suffixProps.clearButtonProps.isVisible) return null;
+        !widget.suffixProps.clearButtonProps.isVisible) {
+      return null;
+    }
 
     return Row(
       textDirection: TextDirection.ltr,
@@ -751,7 +753,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       if (await widget.onBeforePopupOpening!(getSelectedItem) == false) return;
     } else if (widget.onBeforePopupOpeningMultiSelection != null) {
       if (await widget.onBeforePopupOpeningMultiSelection!(getSelectedItems) ==
-          false) return;
+          false) {
+        return;
+      }
     }
 
     _handleFocus(true);
