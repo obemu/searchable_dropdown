@@ -136,6 +136,13 @@ class DropdownSearch<T> extends StatefulWidget {
   /// display if the input is invalid, or null otherwise.
   final FormFieldValidator<List<T>>? validatorMultiSelection;
 
+  /// The key passed to the internal [FormField], that is used if [mode] is
+  /// [Mode.form].
+  ///
+  /// Depending on if this is a single or multi DropdownSearch, the internal
+  /// [FormField] is either a `FormField<T>` or `FormField<List<T>>`.
+  final Key? formKey;
+
   /// callback executed before applying value change
   final BeforeChange<T>? onBeforeChange;
 
@@ -187,6 +194,7 @@ class DropdownSearch<T> extends StatefulWidget {
     //form properties
     this.onSaved,
     this.validator,
+    this.formKey,
     DropDownDecoratorProps? decoratorProps,
   })  : assert(
           T == String || T == int || T == double || compareFn != null,
@@ -198,7 +206,10 @@ class DropdownSearch<T> extends StatefulWidget {
         ),
         assert(
           mode != Mode.custom ||
-              (decoratorProps == null && onSaved == null && validator == null),
+              (decoratorProps == null &&
+                  onSaved == null &&
+                  validator == null &&
+                  formKey == null),
           'Custom mode has no form properties',
         ),
         decoratorProps = decoratorProps ?? const DropDownDecoratorProps(),
@@ -234,6 +245,7 @@ class DropdownSearch<T> extends StatefulWidget {
     //form properties
     FormFieldSetter<List<T>>? onSaved,
     FormFieldValidator<List<T>>? validator,
+    this.formKey,
     DropDownDecoratorProps? decoratorProps,
   })  : assert(
           T == String || T == int || T == double || compareFn != null,
@@ -245,7 +257,10 @@ class DropdownSearch<T> extends StatefulWidget {
         ),
         assert(
           mode != Mode.custom ||
-              (decoratorProps == null && onSaved == null && validator == null),
+              (decoratorProps == null &&
+                  onSaved == null &&
+                  validator == null &&
+                  formKey == null),
           "Custom mode has no form properties",
         ),
         decoratorProps = decoratorProps ?? const DropDownDecoratorProps(),
@@ -403,6 +418,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
 
   Widget _formFieldSingleSelection() {
     return FormField<T>(
+      key: widget.formKey,
       enabled: widget.enabled,
       onSaved: widget.onSaved,
       validator: widget.validator,
@@ -437,6 +453,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
 
   Widget _formFieldMultiSelection() {
     return FormField<List<T>>(
+      key: widget.formKey,
       enabled: widget.enabled,
       onSaved: widget.onSavedMultiSelection,
       validator: widget.validatorMultiSelection,
