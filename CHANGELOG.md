@@ -1,3 +1,7 @@
+## [6.0.3] - 2025.05.09
+* #### New Feature:
+  * add `formKey` parameter to `DropdownSearch`, this new parameter allows to user to retrieve the `FormFieldState` of the internal `FormField`.
+
 ## [6.0.2] - 2025.01.16
 * Fix lint errors
 
